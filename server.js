@@ -1,10 +1,10 @@
 let http = require("http");
-let url = require("url");
 
-function start(route) {
+function start(route, handle) {
   function onRequest(request, response) {
-    let pathname = url.parse(request.url).pathname;
-    route(pathname);
+    let myURL = new URL("http://localhost:8888" + request.url);
+    let pathname = myURL.pathname;
+    route(pathname, handle);
 
     response.writeHead(200, { "content-Type": "text/html" });
     response.write("Hello Node.js");
