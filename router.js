@@ -1,8 +1,12 @@
-function route(pathname, handle) {
+function route(pathname, handle, response) {
   console.log("pathname :" + pathname);
 
   if (typeof handle[pathname] === "function") {
-    handle[pathname]();
+    handle[pathname](response);
+  } else {
+    response.writeHead(404, { "content-Type": "text/html" });
+    response.write("Not Found");
+    response.end();
   }
 }
 
